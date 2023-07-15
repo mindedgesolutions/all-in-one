@@ -29,4 +29,7 @@
 <script src="{{ asset('theme') }}/dist/js/demo.min.js?1674944402" defer></script>
 </body>
 
+@stack('js')
+@include('sweetalert::alert')
+
 </html>
