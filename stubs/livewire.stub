@@ -1,0 +1,38 @@
+<?php
+
+namespace [namespace];
+
+use Livewire\Component;
+
+class [class] extends Component
+{
+    public function mount()
+    {
+
+    }
+
+    public function rules()
+    {
+        $rules = [];
+
+        return $rules;
+    }
+
+    protected $validationAttributes = [
+
+    ];
+
+    protected $messages = [
+
+    ];
+
+    public function updated($fields)
+    {
+        $this->validateOnly($fields);
+    }
+    
+    public function render()
+    {
+        return view('[view]');
+    }
+}
