@@ -69,4 +69,44 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->hasOne(UserDetail::class, 'user_id', 'id');
     }
+
+    /*------------- Search related scopes ------------*/
+    
+    public function scopeFilterByUser($query, $user)
+    {
+        $query->where(function ($query) use ($user) {
+            $query->where('name', 'like', '%' . $user . '%')
+                ->orWhere('email', 'like', '%' . $user . '%')
+                ->orWhere('phone', 'like', '%' . $user . '%');
+        });
+    }
+
+    public function scopeFilterFromDetails($query, $job = null, $dob_start = null, $dob_end = null, $dor_start = null, $dor_end = null)
+    {
+        if ($job) {
+            $query = $query->whereHas('details', function ($query) use ($job) {
+                $query->where('user_type_id', $job);
+            });
+        }
+        if ($dob_start) {
+            $query = $query->whereHas('details', function ($query) use ($dob_start) {
+                $query->where('dob', '>=', $dob_start);
+            });
+        }
+        if ($dob_end) {
+            $query = $query->whereHas('details', function ($query) use ($dob_end) {
+                $query->where('dob', '<=', $dob_end);
+            });
+        }
+        if ($dor_start) {
+            $query = $query->whereHas('details', function ($query) use ($dor_start) {
+                $query->where('dor', '>=', $dor_start);
+            });
+        }
+        if ($dor_end) {
+            $query = $query->whereHas('details', function ($query) use ($dor_end) {
+                $query->where('dor', '<=', $dor_end);
+            });
+        }
+    }
 }

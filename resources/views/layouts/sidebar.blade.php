@@ -23,6 +23,30 @@
                         <span class="nav-link-title">Home</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('employee.index') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-users fs-3"></i>
+                        </span>
+                        <span class="nav-link-title">Employees</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-businessplan fs-3"></i>
+                        </span>
+                        <span class="nav-link-title">Clients</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <i class="ti ti-topology-ring fs-3"></i>
+                        </span>
+                        <span class="nav-link-title">Projects</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

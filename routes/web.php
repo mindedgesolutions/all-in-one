@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\DashboardRedirect;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UserSettings\PasswordController;
 use App\Http\Controllers\UserSettings\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -40,4 +41,9 @@ Route::middleware(['auth', 'prevent.back', 'user.basic'])->group(function(){
     Route::post('/profile/{slug}/update', [ProfileController::class, 'update'])->name('settings.profile.update');
     Route::get('/change-password/{slug}', [PasswordController::class, 'changePassword'])->name('settings.password');
     Route::post('/change-password/{slug}/update', [PasswordController::class, 'update'])->name('settings.password.update');
+
+    Route::controller(EmployeeController::class)->name('employee.')->prefix('/employee')->group(function(){
+        Route::get('/list', 'index')->name('index');
+        Route::get('/list/{user?}/{role?}/{job?}/{dob_start?}/{dob_end?}/{dor_start?}/{dor_end?}/{f?}', 'filter')->name('filter');
+    });
 });
