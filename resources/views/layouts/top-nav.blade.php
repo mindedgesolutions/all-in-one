@@ -59,7 +59,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="{{ route('settings.profile', ['slug' => $userSlug]) }}" class="dropdown-item">Profile</a>
-                    <a href="{{ route('settings.password') }}" class="dropdown-item">Change password</a>
+                    <a href="{{ route('settings.password', ['slug' => $userSlug]) }}" class="dropdown-item">Change password</a>
                     <div class="dropdown-divider"></div>
                     <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                 </div>

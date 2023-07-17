@@ -38,5 +38,6 @@ Route::middleware(['auth', 'prevent.back', 'user.basic'])->group(function(){
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/profile/{slug}', [ProfileController::class, 'profile'])->name('settings.profile');
     Route::post('/profile/{slug}/update', [ProfileController::class, 'update'])->name('settings.profile.update');
-    Route::get('/change-password', [PasswordController::class, 'changePassword'])->name('settings.password');
+    Route::get('/change-password/{slug}', [PasswordController::class, 'changePassword'])->name('settings.password');
+    Route::post('/change-password/{slug}/update', [PasswordController::class, 'update'])->name('settings.password.update');
 });

@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers\UserSettings;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\ProfileRequest;
 use App\Models\User;
-use App\Models\UserDetail;
 use App\Models\UserType;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ProfileRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProfileController extends Controller
 {
-    public function profile()
+    public function profile($slug)
     {
+        $array = explode('.', $slug);
+        if (Auth::id() != $array[1])
+            abort(403);
+
         $id = Auth::id();
         $user = User::whereId($id)->with('details.userType', 'roles')->first();
         $userTypes = UserType::orderBy('name')->get();
@@ -44,21 +49,20 @@ class ProfileController extends Controller
                 'middle_name' => $request->mname != '' ? $request->mname : null,
                 'last_name' => $request->lname,
                 'address_line_1' => $request->addressLineOne,
-                'address_line_2' => $request->addressLineTwo!='' ? $request->addressLineTwo : null,
+                'address_line_2' => $request->addressLineTwo != '' ? $request->addressLineTwo : null,
                 'dob' => $request->dob
             ]);
-            if ($request->avatar){
+            if ($request->avatar) {
                 $user->clearMediaCollection('avatar');
                 $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
             }
             DB::commit();
             $success = "Profile updated";
             Alert::success('Updated', 'Profile updated');
-            return redirect()->route('settings.profile', $slug)->with($success);
-            
+            return redirect()->back()->with($success);
         } catch (\Throwable $th) {
             DB::rollBack();
-            echo 'Something went wrong! '.$th->getMessage();
+            echo 'Something went wrong! ' . $th->getMessage();
         }
     }
 }

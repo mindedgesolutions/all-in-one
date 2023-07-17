@@ -12,6 +12,9 @@
                     <!-- Page pre-title -->
                     <div class="page-pretitle">Overview</div>
                     <h2 class="page-title">Admin Dashboard</h2>
+                    <div class="page-pretitle">Register page: Modal with redirect (Livewire)</div>
+                    <div class="page-pretitle">Profile: SweetAlert (Laravel Controller)</div>
+                    <div class="page-pretitle">Change password: Modal alert(Laravel controller)</div>
                 </div>
             </div>
         </div>

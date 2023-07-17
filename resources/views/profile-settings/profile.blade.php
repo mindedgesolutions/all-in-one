@@ -146,7 +146,6 @@
                                         <div class="col-auto">
                                             <img class="avatar avatar-xl" id="uploaded" src="{{ $avatar }}"
                                                 alt="" />
-                                            {{-- <span class="avatar avatar-xl" id="preview" style="display: none"></span> --}}
                                         </div>
                                         <div class="col-md-4">
                                             <input type="file" class="form-control" name='avatar' id="avatar">

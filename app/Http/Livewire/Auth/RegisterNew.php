@@ -19,7 +19,7 @@ class RegisterNew extends Component
     public $iteration = 0;
     public $userTypeId, $roleName, $fname, $mname, $lname, $email, $phone, $addressLineOne, $addressLineTwo;
     public $dob, $dor, $salary, $password, $passwordConfirm, $avatar, $terms, $hasImage;
-    public $notificationTitle, $notificationBody;
+    public $notificationTitle, $notificationBody, $btnLabel;
 
     protected $listeners = [
         'resetFormFields' => 'resetFormFields',
@@ -117,6 +117,7 @@ class RegisterNew extends Component
 
             $this->notificationTitle = 'Thank you for registering';
             $this->notificationBody = 'Thank you for registering';
+            $this->btnLabel = 'Go to Dashboard';
             $this->dispatchBrowserEvent('open-notification-modal', ['id' => 'modal-success']);
         } catch (\Throwable $th) {
             DB::rollBack();
