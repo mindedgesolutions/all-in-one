@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Policies\UserProfilePolicy;
 use Spatie\Image\Manipulations;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
@@ -53,6 +52,8 @@ class User extends Authenticatable implements HasMedia
         'password' => 'hashed',
     ];
 
+    /*------------- Media / photo related ------------*/
+
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('card')
@@ -64,6 +65,8 @@ class User extends Authenticatable implements HasMedia
             ->height(60)
             ->nonQueued();
     }
+
+    /*------------- Relationships ------------*/
 
     public function details()
     {

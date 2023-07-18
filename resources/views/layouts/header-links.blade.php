@@ -13,6 +13,7 @@
     <link href="{{ asset('theme') }}/dist/css/tabler-vendors.min.css?1674944402" rel="stylesheet" />
     <link href="{{ asset('theme') }}/dist/css/demo.min.css?1674944402" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         @import url('https://rsms.me/inter/inter.css');
 

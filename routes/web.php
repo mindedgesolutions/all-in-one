@@ -43,7 +43,8 @@ Route::middleware(['auth', 'prevent.back', 'user.basic'])->group(function(){
     Route::post('/change-password/{slug}/update', [PasswordController::class, 'update'])->name('settings.password.update');
 
     Route::controller(EmployeeController::class)->name('employee.')->prefix('/employee')->group(function(){
-        Route::get('/list', 'index')->name('index');
-        Route::get('/list/{user?}/{role?}/{job?}/{dob_start?}/{dob_end?}/{dor_start?}/{dor_end?}/{f?}', 'filter')->name('filter');
+        Route::get('/list/{user?}/{role?}/{job?}/{dob_start?}/{dob_end?}/{dor_start?}/{dor_end?}/{f?}', 'index')->name('index');
+        Route::post('/validate-date-filters', 'validateDateFilters')->name('validate.date');
+        Route::post('/export-employee-data', 'exportEmployeeData')->name('export.data');
     });
 });

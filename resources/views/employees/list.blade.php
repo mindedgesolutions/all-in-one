@@ -15,9 +15,12 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <span class="d-none d-sm-inline">
-                            <a href="{{ route('employee.index') }}"><button class="btn btn-default me-2"><i class="ti ti-x fs-5 me-2"></i></i>Clear</button></a>
+                            <a href="{{ route('employee.index') }}"><button class="btn btn-default me-2"><i
+                                        class="ti ti-x fs-5 me-2"></i></i>Clear</button></a>
 
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-filter-employee"><i class="ti ti-filter fs-5 me-2"></i>Filters</button>
+                            <button class="btn btn-primary me-2" data-bs-toggle="modal"
+                                data-bs-target="#modal-filter-employee"><i
+                                    class="ti ti-filter fs-5 me-2"></i>Filters</button>
                         </span>
                     </div>
                 </div>
@@ -26,6 +29,183 @@
     </div>
     <!-- Page body -->
     <div class="page-body">
+
+        <div class="container-xl mb-2">
+            <div class="col-12">
+                <form id="exports" action="{{ route('employee.export.data') }}" method="post">
+                    @csrf
+                    <div class="card p-2">
+                        <div class="form-selectgroup-boxes row mb-3">
+                            <div class="col-lg-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="radio" name="exportType" value="excel" class="form-selectgroup-input"
+                                        checked="">
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Excel</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="radio" name="exportType" value="csv" class="form-selectgroup-input">
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">CSV</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-selectgroup-boxes row mb-3">
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="name"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Name</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="email"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Email</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="phone"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Phone</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="role"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Role</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="user_type_id"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Job profile</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="address"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Address</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="dob"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">D.O.B</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="dor"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">D.O.R</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="col-lg-2 mb-2">
+                                <label class="form-selectgroup-item">
+                                    <input type="checkbox" name="selectedFields[]" value="salary"
+                                        class="form-selectgroup-input" @checked(true)>
+                                    <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                        <span class="me-3">
+                                            <span class="form-selectgroup-check"></span>
+                                        </span>
+                                        <span class="form-selectgroup-label-content">
+                                            <span class="form-selectgroup-title strong mb-1">Salary</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-auto ms-auto d-print-none">
+                            <div class="btn-list">
+                                <span class="d-none d-sm-inline">
+                                    <button class="btn btn-success" type="submit">Export</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="container-xl">
             <div class="col-12">
                 <div class="card">
@@ -80,12 +260,14 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer d-flex justify-content-between">{{ $employees->withQueryString()->links() }}</div>
+                    <div class="card-footer d-flex justify-content-between">{{ $employees->withQueryString()->links() }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     @include('modals.employee-filter-modal')
+    @include('modals.employee-export-modal')
 
 @endsection
