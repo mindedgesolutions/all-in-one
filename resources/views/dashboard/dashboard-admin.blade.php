@@ -46,7 +46,7 @@
                                     <ol class="px-3">
                                         <li>Employee: Modal filter + Ajax validation (Laravel)</li>
                                         <li>Employee: URL redirect Ajax after Filter validation (Laravel)</li>
-                                        <li>Employee: Export to excel (Pending)</li>
+                                        <li>Employee: Export to excel</li>
                                     </ol>
                                 </div>
                                 

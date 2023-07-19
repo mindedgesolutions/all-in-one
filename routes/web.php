@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\DashboardRedirect;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\UserSettings\PasswordController;
 use App\Http\Controllers\UserSettings\ProfileController;
@@ -19,16 +20,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Non Auth based routes -----------------*
-Route::middleware('guest')->controller(AuthController::class)->group(function(){
+Route::middleware('guest')->controller(AuthController::class)->group(function () {
     Route::get('/register', 'register')->name('register');
     Route::get('/', 'login')->name('login');
 });
 
-Route::middleware(['auth', 'prevent.back', 'user.basic'])->group(function(){
+// Route::middleware(['auth', 'prevent.back', 'user.basic'])->group(function(){
+Route::middleware(['auth', 'user.basic'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'redirect'])->name('dashboard');
 
     // Role based routes starts -----------------*
-    Route::controller(AuthController::class)->group(function(){
+    Route::controller(AuthController::class)->group(function () {
         Route::get('/admin-dashboard', 'adminDashboard')->name('admin.dashboard')->middleware('admin.dashboard');
         Route::get('/manager-dashboard', 'managerDashboard')->name('manager.dashboard')->middleware('manager.dashboard');
         Route::get('/your-dashboard', 'employeeDashboard')->name('employee.dashboard')->middleware('employee.dashboard');
@@ -42,9 +44,14 @@ Route::middleware(['auth', 'prevent.back', 'user.basic'])->group(function(){
     Route::get('/change-password/{slug}', [PasswordController::class, 'changePassword'])->name('settings.password');
     Route::post('/change-password/{slug}/update', [PasswordController::class, 'update'])->name('settings.password.update');
 
-    Route::controller(EmployeeController::class)->name('employee.')->prefix('/employee')->group(function(){
+    Route::controller(EmployeeController::class)->name('employee.')->prefix('/employee')->group(function () {
         Route::get('/list/{user?}/{role?}/{job?}/{dob_start?}/{dob_end?}/{dor_start?}/{dor_end?}/{f?}', 'index')->name('index');
         Route::post('/validate-date-filters', 'validateDateFilters')->name('validate.date');
         Route::post('/export-employee-data', 'exportEmployeeData')->name('export.data');
+        Route::get('/employee/view/modal', 'viewEmployeeModal')->name('view.modal');
+    });
+
+    Route::controller(ClientController::class)->name('.client')->prefix('/client')->group(function(){
+
     });
 });
