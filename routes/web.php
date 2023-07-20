@@ -51,7 +51,8 @@ Route::middleware(['auth', 'user.basic'])->group(function () {
         Route::get('/employee/view/modal', 'viewEmployeeModal')->name('view.modal');
     });
 
-    Route::controller(ClientController::class)->name('.client')->prefix('/client')->group(function(){
-
+    Route::controller(ClientController::class)->name('client.')->prefix('/client')->group(function(){
+        Route::get('/list', 'index')->name('index');
+        Route::post('/client/view/modal', 'viewClientModal')->name('view.modal');
     });
 });

@@ -47,6 +47,7 @@
                                         <li>Employee: Modal filter + Ajax validation (Laravel)</li>
                                         <li>Employee: URL redirect Ajax after Filter validation (Laravel)</li>
                                         <li>Employee: Export to excel</li>
+                                        <li>Employee: Image rendering from Ajax (JSON)</li>
                                     </ol>
                                 </div>
                                 
