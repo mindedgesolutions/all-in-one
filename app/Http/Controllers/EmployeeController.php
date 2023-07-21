@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserType;
 use App\Exports\UserExport;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Maatwebsite\Excel\Facades\Excel;
@@ -134,6 +135,19 @@ class EmployeeController extends Controller
             'dob' => $dob,
             'dor' => $dor,
             'avatar' => $avatar,
+        ]);
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $user = User::where('id', $id)->first();
+        $user->clearMediaCollection('avatar');
+
+        UserDetail::where('user_id', $id)->delete();
+        User::where('id', $id)->delete();
+
+        return response()->json([
+            'code' => 200,
         ]);
     }
 }

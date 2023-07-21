@@ -49,6 +49,7 @@ Route::middleware(['auth', 'user.basic'])->group(function () {
         Route::post('/validate-date-filters', 'validateDateFilters')->name('validate.date');
         Route::post('/export-employee-data', 'exportEmployeeData')->name('export.data');
         Route::get('/employee/view/modal', 'viewEmployeeModal')->name('view.modal');
+        Route::post('/employee/{id}/delete', 'delete')->name('delete');
     });
 
     Route::controller(ClientController::class)->name('client.')->prefix('/client')->group(function(){

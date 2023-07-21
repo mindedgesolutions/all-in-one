@@ -27,6 +27,10 @@
 <!-- Tabler Core -->
 <script src="{{ asset('theme') }}/dist/js/tabler.min.js?1674944402" defer></script>
 <script src="{{ asset('theme') }}/dist/js/demo.min.js?1674944402" defer></script>
+
+<!-- Sweet Alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
 
 @stack('js')

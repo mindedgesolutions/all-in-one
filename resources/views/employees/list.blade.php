@@ -79,7 +79,9 @@
                                             <button class="btn btn-primary mx-1 p-1 fs-5"><i
                                                     class="ti ti-edit"></i></button>
 
-                                            <button class="btn btn-danger p-1 fs-5"><i class="ti ti-trash"></i></button>
+                                            <button class="btn btn-danger p-1 fs-5"
+                                                onclick="confirmDelete({{ $employee->id }})"><i
+                                                    class="ti ti-trash"></i></button>
                                         </td>
                                     </tr>
                                 @empty
@@ -110,6 +112,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        var baseUrl = "{{ url('/') }}";
 
         function openView(param) {
             var id = param;
@@ -137,6 +140,37 @@
                     $('#uploaded').html(avatar);
                 }
             });
+        }
+
+        function confirmDelete(param) {
+            Swal.fire({
+                title: 'Delete',
+                text: 'Delete employee?',
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: 'Yes, delete!',
+                denyButtonText: `No, don't`,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var id = param;
+                    $.ajax({
+                        type: "post",
+                        url: baseUrl + "/employee/employee/" + id + "/delete",
+                        success: function(response) {
+                            if (response.code){
+                                Swal.fire('Deleted!', 'Employee deleted permanently', 'success').then((e) => {
+                                    if (e.isConfirmed){
+                                        window.location.reload();
+                                    }
+                                });
+                            }
+                        }
+                    });
+                } else if (result.isDenied) {}
+            })
+
         }
     </script>
 @endpush
