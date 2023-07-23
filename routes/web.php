@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\DashboardRedirect;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserSettings\PasswordController;
 use App\Http\Controllers\UserSettings\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -55,5 +56,12 @@ Route::middleware(['auth', 'user.basic'])->group(function () {
     Route::controller(ClientController::class)->name('client.')->prefix('/client')->group(function(){
         Route::get('/list', 'index')->name('index');
         Route::post('/client/view/modal', 'viewClientModal')->name('view.modal');
+        Route::get('/export-client-data', 'exportClientData')->name('export.data');
+        Route::post('/send-email', 'sendEmail')->name('send.email');
+    });
+
+    Route::controller(ProjectController::class)->name('project.')->prefix('/project')->group(function(){
+        Route::get('/list', 'index')->name('index');
+        // Route::get('/assign-employees', 'assignEmployee')->name('assign.employee');
     });
 });

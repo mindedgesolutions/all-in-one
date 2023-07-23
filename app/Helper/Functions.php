@@ -39,7 +39,9 @@ function clientContacts($id)
 {
   $all = ClientContact::where('client_id', $id)->get();
   $contactsOne = '';
+  $contactsOneExport = '';
   $contactsTwo = '';
+  $contactsTwoExport = '';
   foreach ($all as $key => $value) {
     if ($key == 0) {
       $contactsOne =
@@ -48,14 +50,26 @@ function clientContacts($id)
           <div class="text-muted"><i class="ti ti-mail"></i> <a href="#"
                   class="text-reset">' . $value->email . '</a></div>
         </div>';
-    }else{
+
+      $contactsOneExport =
+        '<td>' . $value->contact_person . '</td>
+        <td>' . $value->email . '</td>
+        <td>' . $value->phone_1 . '</td>
+        <td>' . $value->phone_2 . '</td>';
+    } else {
       $contactsTwo =
         '<div class="flex-fill">
           <div class="font-weight-medium"><i class="ti ti-user"></i> ' . $value->contact_person . '</div>
           <div class="text-muted"><i class="ti ti-mail"></i> <a href="#"
                   class="text-reset">' . $value->email . '</a></div>
         </div>';
+
+      $contactsTwoExport =
+        '<td>' . $value->contact_person . '</td>
+        <td>' . $value->email . '</td>
+        <td>' . $value->phone_1 . '</td>
+        <td>' . $value->phone_2 . '</td>';
     }
   }
-  return array($contactsOne, $contactsTwo);
+  return array($contactsOne, $contactsTwo, $contactsOneExport, $contactsTwoExport);
 }

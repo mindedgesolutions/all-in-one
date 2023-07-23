@@ -39,13 +39,18 @@
                         <span class="nav-link-title">Clients</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('dashboard') }}">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
+                        data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-topology-ring fs-3"></i>
                         </span>
                         <span class="nav-link-title">Projects</span>
                     </a>
+                    <div class="dropdown-menu" data-bs-popper="static">
+                        <a class="dropdown-item" href="{{ route('project.index') }}">Projects</a>
+                        {{-- <a class="dropdown-item" href="{{ route('project.assign.employee') }}">Assign Employee</a> --}}
+                    </div>
                 </li>
             </ul>
         </div>

@@ -62,8 +62,9 @@
                             <div class="d-flex align-items-center">
                                 <div class="subheader">
                                     <ol class="px-3">
-                                        <li>Client: Send email (Single) (Laravel) (Pending)</li>
-                                        <li>Client: Send email (Bulk) (Laravel) (Pending)</li>
+                                        <li>Client: Advenced seeder</li>
+                                        <li>Client: Send email (Single) (Laravel)</li>
+                                        <li>Client: Send email (Bulk) (Laravel)</li>
                                         <li>Client: UNIT Testing (Pending)</li>
                                         <li>Client / Project: Many to Many relationship (Pending)</li>
                                         <li>Client: STRIPE Payment Gateway (Pending)</li>

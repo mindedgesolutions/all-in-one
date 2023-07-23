@@ -19,11 +19,10 @@
                                         class="ti ti-x fs-5 me-2"></i></i>Clear</button></a>
 
                             <button class="btn btn-primary me-2" data-bs-toggle="modal"
-                                data-bs-target="#modal-filter-client"><i
-                                    class="ti ti-filter fs-5 me-2"></i>Filters</button>
+                                data-bs-target="#modal-filter-client"><i class="ti ti-filter fs-5 me-2"></i>Filters</button>
 
-                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modal-export-employee"
-                                type="button">Export</button>
+                            <a href="{{ route('client.export.data') }}"><button class="btn btn-success me-2"
+                                    type="button">Export</button></a>
                         </span>
                     </div>
                 </div>
@@ -58,6 +57,9 @@
                                             {{ strlen($client->address) > 25 ? substr($client->address, 0, 25) . ' ...' : $client->address }}
                                         </td>
                                         <td class="text-end">
+                                            <button class="btn btn-success mx-1 p-1 fs-5"
+                                                onclick="sendEmail({{ $client->id }})"><i class="ti ti-mail-filled"></i></button>
+
                                             <button class="btn btn-success mx-1 p-1 fs-5"
                                                 onclick="openView({{ $client->id }})"><i class="ti ti-eye"></i></button>
 
@@ -110,37 +112,50 @@
                     $('#address').text(response.address);
                     $('#contact-header').html(
                         '<div class="row">\
-                            <div class="col-md-4">\
-                                <label class="form-label">Name</label>\
-                            </div>\
-                            <div class="col-md-4">\
-                                <label class="form-label">Email</label>\
-                            </div>\
-                            <div class="col-md-2">\
-                                <label class="form-label">Phone 1</label>\
-                            </div>\
-                            <div class="col-md-2">\
-                                <label class="form-label">Phone 2</label>\
-                            </div>\
-                        </div>'
+                                    <div class="col-md-4">\
+                                        <label class="form-label">Name</label>\
+                                    </div>\
+                                    <div class="col-md-4">\
+                                        <label class="form-label">Email</label>\
+                                    </div>\
+                                    <div class="col-md-2">\
+                                        <label class="form-label">Phone 1</label>\
+                                    </div>\
+                                    <div class="col-md-2">\
+                                        <label class="form-label">Phone 2</label>\
+                                    </div>\
+                                </div>'
                     );
                     $.each(response.contacts, function(index, value) {
                         var contact = '<div class="row">\
-                            <div class="col-md-4">\
-                                <label class="form-label">' + value.contact_person + '</label>\
-                            </div>\
-                            <div class="col-md-4">\
-                                <label class="form-label">' + value.email + '</label>\
-                            </div>\
-                            <div class="col-md-2">\
-                                <label class="form-label">' + value.phone_1 + '</label>\
-                            </div>\
-                            <div class="col-md-2">\
-                                <label class="form-label">' + value.phone_2 + '</label>\
-                            </div>\
-                        </div>';
+                                    <div class="col-md-4">\
+                                        <label class="form-label">' + value.contact_person + '</label>\
+                                    </div>\
+                                    <div class="col-md-4">\
+                                        <label class="form-label">' + value.email + '</label>\
+                                    </div>\
+                                    <div class="col-md-2">\
+                                        <label class="form-label">' + value.phone_1 + '</label>\
+                                    </div>\
+                                    <div class="col-md-2">\
+                                        <label class="form-label">' + value.phone_2 + '</label>\
+                                    </div>\
+                                </div>';
                         $('#contacts').append(contact);
                     });
+                }
+            });
+        }
+
+        function sendEmail(param) {
+            var id = param;
+            
+            $.ajax({
+                type: "post",
+                url: "{{ route('client.send.email') }}",
+                data: {id: id},
+                success: function (response) {
+                    console.log(response);
                 }
             });
         }
